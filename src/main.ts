@@ -13,7 +13,6 @@ const express = require('express');
 const binaryMimeTypes: string[] = [];
 
 let cachedServer: Server;
-let server: Handler;
 
 process.on('unhandledRejection', (reason) => {
   console.error(reason);
@@ -34,6 +33,11 @@ function setupSwagger(app: INestApplication) {
     .setDescription('My REST API Description')
     .setVersion('1.0.0')
     .addTag('Api Tag')
+    /**
+     * To make swagger "Try it out" to work
+     * @see https://github.com/nestjs/swagger/issues/448#issuecomment-596567651
+     */
+    .addServer('/dev')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
