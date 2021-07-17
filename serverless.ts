@@ -7,6 +7,7 @@ const serverlessConfiguration: AWS = {
   provider: {
     name: 'aws',
     runtime: 'nodejs12.x',
+    stage: '${opt:stage, "dev"}',
   },
   functions: {
     main: {
